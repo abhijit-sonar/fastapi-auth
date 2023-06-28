@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - 127.0.0.1:8000:8000
+    environment:
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
+      MONGODB_URL: mongodb://root:example@mongo:27017/
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
