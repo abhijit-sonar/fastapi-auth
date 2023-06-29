@@ -7,8 +7,15 @@ name = "pypi"
 fastapi = "*"
 motor = "*"
 uvicorn = "*"
+python-multipart = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
+
+[packages.passlib]
+extras = [ "bcrypt",]
+
+[packages.python-jose]
+extras = [ "cryptography",]

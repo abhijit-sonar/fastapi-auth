@@ -11,4 +11,4 @@ client: AsyncIOMotorClient = AsyncIOMotorClient(MONGODB_URL)
 
 
 def get_collection():
-    return client.people.people
+    return client.users.users
