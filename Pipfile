@@ -8,6 +8,7 @@ fastapi = "*"
 motor = "*"
 uvicorn = "*"
 python-multipart = "*"
+aiohttp = "*"
 
 [dev-packages]
 

@@ -7,13 +7,19 @@ services:
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       MONGODB_URL: mongodb://root:example@mongo:27017/
+      AVATAR_API_URL: http://avatar_api:8080
+    networks:
+      - avatar_api
+      - database
 
   avatar_api:
     build:
       context: avatar_api
       dockerfile: Dockerfile
     ports:
-      - 127.0.0.1:8080:8080
+      - 8080:8080
+    networks:
+      - avatar_api
 
   mongo:
     image: mongo
@@ -22,6 +28,12 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - db-data:/data/db
+    networks:
+      - database
 
 volumes:
   db-data:
+
+networks:
+  avatar_api:
+  database:
