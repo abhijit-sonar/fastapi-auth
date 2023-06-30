@@ -8,6 +8,13 @@ services:
       MONGODB_PASSWORD: example
       MONGODB_URL: mongodb://root:example@mongo:27017/
 
+  avatar_api:
+    build:
+      context: avatar_api
+      dockerfile: Dockerfile
+    ports:
+      - 127.0.0.1:8080:8080
+
   mongo:
     image: mongo
     environment:
