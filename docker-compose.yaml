@@ -11,6 +11,9 @@ services:
     networks:
       - avatar_api
       - database
+    depends_on:
+      - mongo
+      - avatar_api
 
   avatar_api:
     build:
