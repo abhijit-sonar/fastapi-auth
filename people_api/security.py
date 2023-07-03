@@ -9,7 +9,6 @@ import os
 
 from .deps import get_collection
 from .models.user import DbUser
-from .models.token import Token
 
 Collection = Annotated[Any, Depends(get_collection)]
 
