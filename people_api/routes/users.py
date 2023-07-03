@@ -30,8 +30,8 @@ async def current_user(
     return current_user
 
 
-async def _avatar(name: str):
-    image_response = await http_client_session.get(avatar_api_url, params={"name": name})
+async def _avatar(name: str, key: int):
+    image_response = await http_client_session.get(avatar_api_url, params={"name": name, "key": key})
     image_bytes = await image_response.read()
     image_stream = BytesIO(image_bytes)
 
@@ -40,13 +40,15 @@ async def _avatar(name: str):
 
 @users_router.get("/me/avatar")
 async def current_user_avatar(current_user: Annotated[User, Depends(security.get_current_user)]):
-    return await _avatar(current_user.name)
+    key = int.from_bytes(current_user.id.binary, "big")
+    return await _avatar(current_user.name, key)
 
 
 @users_router.get("/{user_id}/avatar")
 async def user_avatar(user_id: PyObjectId, collection: Collection):
     user = await collection.find_one({"_id": user_id})
-    return await _avatar(user["name"])
+    key = int.from_bytes(user_id.binary, "big")
+    return await _avatar(user["name"], key)
 
 
 @users_router.get("/", response_model=UserPage, response_description="A paged list of all the users")
