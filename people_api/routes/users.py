@@ -82,6 +82,6 @@ async def edit_profile(user: UserUpdate, current_user: Annotated[DbUser, Depends
 
     user_dict = user.dict()
 
-    await collection.replace_one({"_id": current_user.id}, user_dict)
+    await collection.update_one({"_id": current_user.id}, {"$set": user_dict})
 
     return dict(_id=current_user.id, **user_dict)
